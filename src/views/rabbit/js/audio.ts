@@ -4,7 +4,15 @@ export let AUDIODATA = {
 	OPEN: "assets/audio/open.mp3",
 	FADE:"assets/audio/fade.mp3",
 }
-let bgm = new Audio()
+interface bg {
+	'src': string,
+	'volume':number,
+    'loop':boolean,
+    currentTime:number,
+	play:any,
+	paused:any
+}
+let bgm : bg = new Audio()
 bgm.src = AUDIODATA.BGMMAIN
 
 let se_open = new Audio();
@@ -19,6 +27,7 @@ se_fade.src = AUDIODATA.FADE;
 export function playSeOpen():object{
 	se_open.currentTime = 0
 	se_open.volume = 100 / 100;
+	se_open.muted = true
 	se_open.play()
 	return se_open
 }
@@ -35,10 +44,10 @@ export function playSePress():object{
 	se_press.play()
 	return se_press
 }
-export function playBgm (continuate:Boolean = true) :object{
+export function playBGM (continuate:Boolean = true) :any{
 	if (!continuate) bgm.currentTime = 0;
 	bgm.volume = 60 / 100;
-	bgm.loop = true;
+    bgm.loop = true;
 	bgm.play();
 	return bgm
 }
